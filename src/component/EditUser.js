@@ -35,7 +35,7 @@ export const EditUser = () => {
         else {
             navigate('/dashboard')
         }
-    }, [])
+    }, [id, navigate, context])
 
     return (
         <>
