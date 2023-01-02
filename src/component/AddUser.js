@@ -1,12 +1,12 @@
-import React, { useState,useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useNavigate } from 'react-router-dom';
-import { userContext } from '../App';
+import { UserContext } from './contextComponent/UserContextComponent ';
 
 
 const AddUser = () => {
-  let context = useContext(userContext);
+  let context = useContext(UserContext);
   let [name, setName] = useState("")
   let [email, setEmail] = useState("")
   let [mobile, setMobile] = useState("")

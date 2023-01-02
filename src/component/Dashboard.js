@@ -1,22 +1,25 @@
-import React,{useContext} from 'react'
+import React, { useContext } from 'react'
 import BasicCard from './CardComponents/BasicCard'
 import ProgressCard from './CardComponents/ProgressCard';
 import Table from 'react-bootstrap/Table';
 import { useNavigate } from 'react-router-dom';
-import { userContext } from '../App';
+import { UserContext } from './contextComponent/UserContextComponent ';
+import { DashboardContext } from './contextComponent/DashboardContextComponent';
 
 const Dashboard = () => {
-    let context = useContext(userContext);
+    let context = useContext(UserContext);
+    let dash = useContext(DashboardContext);
     let navigate = useNavigate();
     let handleDelete = (i) => {
-        let newArray=[...context.users]
+        let newArray = [...context.users]
         newArray.splice(i, 1)
         context.setUsers(newArray)
-        
-        
+
+
     }
 
-    return <div id="content-wrapper" className="d-flex flex-column">
+    return <>
+        <div id="content-wrapper" className="d-flex flex-column">
 
         {/* <!-- Main Content --> */}
         <div id="content">
@@ -33,10 +36,10 @@ const Dashboard = () => {
 
                 {/* <!-- Content Row --> */}
                 <div className="row">
-                    <BasicCard label="Earnings (Monthly)" value={context.data.earningsMonthly} icon='fa-calendar' border='primary' titleColor='primary' />
-                    <BasicCard label="Earnings (Yearly)" value={context.data.earningsYearly} icon='fa-dollar-sign' border='success' titleColor='success' />
-                    <ProgressCard label="Tasks" value={context.data.task} icon='fa-clipboard-list' border='info' />
-                    <BasicCard label="Pending Requests" value={context.data.pendingRequest} icon='fa-comments' border='warning' titleColor='warning' />
+                    <BasicCard label="Earnings (Monthly)" value={dash.earningsMonthly} icon='fa-calendar' border='primary' titleColor='primary' />
+                    <BasicCard label="Earnings (Yearly)" value={dash.earningsYearly} icon='fa-dollar-sign' border='success' titleColor='success' />
+                    <ProgressCard label="Tasks" value={dash.task} icon='fa-clipboard-list' border='info' />
+                    <BasicCard label="Pending Requests" value={dash.pendingRequest} icon='fa-comments' border='warning' titleColor='warning' />
                 </div>
 
                 <Table striped bordered hover>
@@ -56,7 +59,7 @@ const Dashboard = () => {
 
                             context.users.map((e, i) => {
                                 // unique key prop
-                                return <tr key={i}> 
+                                return <tr key={i}>
                                     <td>{i + 1}</td>
                                     <td>{e.name}</td>
                                     <td>{e.email}</td>
@@ -64,9 +67,9 @@ const Dashboard = () => {
                                     <td>{e.batch}</td>
                                     <td>{e.timings}</td>
                                     <td>
-                                        <button className='btn btn-primary' onClick={()=>navigate(`/edit-user/${i}`)}><i className="fas fa-pen-to-square" style={{ paddingRight: "5px" }}></i>Edit</button>
+                                        <button className='btn btn-primary' onClick={() => navigate(`/edit-user/${i}`)}><i className="fas fa-pen-to-square" style={{ paddingRight: "5px" }}></i>Edit</button>
                                         &nbsp; &nbsp;
-                                        <button className=" btn btn-danger" onClick={()=>handleDelete(i)}> <i className="fas fa-trash" style={{ paddingRight: "5px" }}></i>Delete</button>
+                                        <button className=" btn btn-danger" onClick={() => handleDelete(i)}> <i className="fas fa-trash" style={{ paddingRight: "5px" }}></i>Delete</button>
                                     </td>
                                 </tr>
                             })
@@ -76,7 +79,7 @@ const Dashboard = () => {
             </div>
         </div>
     </div>
-
+    </>
 
 
 

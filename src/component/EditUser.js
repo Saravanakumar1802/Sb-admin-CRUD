@@ -3,11 +3,11 @@ import { useParams } from 'react-router-dom'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useNavigate } from 'react-router-dom';
-import { userContext } from '../App';
+import { UserContext } from './contextComponent/UserContextComponent ';
 
 export const EditUser = () => {
     let { id } = useParams()
-    let context = useContext(userContext);
+    let context = useContext(UserContext);
 
     let [name, setName] = useState("")
     let [email, setEmail] = useState("")
